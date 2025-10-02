@@ -27,5 +27,24 @@ class MainActivity : AppCompatActivity() {
         val tvInformation = findViewById<TextView>(R.id.tvInformation)
         val btnSend = findViewById<Button>(R.id.btSend)
         val btnDelete = findViewById<Button>(R.id.btdelete)
+
+        // nastaveni obsluhy pro tlacitko send
+
+        btnSend.setOnClickListener {
+            val firstName = etFirstName.text.toString()
+            val lastName = etLastName.text.toString()
+            val city = etCity.text.toString()
+            val age = etAge.text.toString().toIntOrNull() ?: 0
+
+            val info = "My name is $firstName $lastName, I am $age years old and I live in $city."
+            tvInformation.text = info
+        }
+        btnDelete.setOnClickListener {
+            etFirstName.text.clear()
+            etLastName.text.clear()
+            etCity.text.clear()
+            etAge.text.clear()
+            tvInformation.text = ""
+        }
     }
 }
