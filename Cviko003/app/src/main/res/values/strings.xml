@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cviko003</string>
+    <string name="question">Jaké kolo chcete objednat?</string>
+    <string name="bike_type_1">OIZ M1O</string>
+    <string name="bike_type_2">OIZ M2O</string>
+    <string name="bike_type_3">OIZ M3O</string>
+    <string name="upgrade_1">lepší vidlice</string>
+    <string name="upgrade_2">lepší sedlo</string>
+    <string name="upgrade_3">karbonová řidítka</string>
+    <string name="order_bike">OBJEDNAT KOLO</string>
+    <string name="order_overview">Souhrn objednávky:</string>
+</resources>

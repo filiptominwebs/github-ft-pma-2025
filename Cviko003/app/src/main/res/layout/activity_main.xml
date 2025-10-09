@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="30dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvOrderTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question"
+        android:layout_marginTop="100dp"
+        android:textAlignment="center"/>
+
+    <RadioGroup
+        android:id="@+id/rgBikeType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bike_type_1"
+            android:id="@+id/rbM1O"
+            android:checked="true"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bike_type_2"
+            android:id="@+id/rbM2O" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bike_type_3"
+            android:id="@+id/rbM3O" />
+    </RadioGroup>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upgrade_1"
+        android:id="@+id/cbFork"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upgrade_2"
+        android:id="@+id/cbSeat"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upgrade_2"
+        android:id="@+id/cbHandleBar"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order_bike"
+        android:id="@+id/btnOrder"/>
+
+    <TextView
+        android:id="@+id/tvOrderSummary"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="@string/order_overview"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/ivBike"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/bike1"
+        android:scaleType="fitCenter"
+        android:layout_height="200dp"/>
+
+</LinearLayout>

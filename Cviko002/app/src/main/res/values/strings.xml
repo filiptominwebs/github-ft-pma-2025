@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Cviko002</string>
+    <string name="enter_meal">Enter name of the meal</string>
+    <string name="calories">Calories</string>
+    <string name="meal_type">Meal type</string>
+    <string name="add_meal">Add Meal</string>
+    <string name="clear_meals">Clear Meals</string>
+</resources>
