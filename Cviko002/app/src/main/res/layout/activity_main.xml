@@ -32,8 +32,7 @@
             android:hint="@string/calories"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/etMealType"
-            app:layout_constraintHorizontalWeight="1"/>
+            app:layout_constraintEnd_toStartOf="@id/etMealType"/>
 
         <EditText
             android:id="@+id/etMealType"
@@ -44,7 +43,6 @@
             app:layout_constraintStart_toEndOf="@id/etCalories"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontalWeight="1"
             android:layout_marginStart="10dp"/>
         <Button
             android:id="@+id/btAddMeal"
@@ -55,8 +53,7 @@
             app:layout_constraintTop_toBottomOf="@id/etCalories"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btClearMeals"
-            app:layout_goneMarginRight="10sp"
-            app:layout_constraintHorizontalWeight="1"/>
+            app:layout_goneMarginRight="10sp" />
 
         <Button
             android:id="@+id/btClearMeals"
@@ -66,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/etCalories"
             app:layout_constraintStart_toEndOf="@id/btAddMeal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontalWeight="1"/>
+            android:layout_marginLeft="10sp"/>
         <TextView
             android:id="@+id/tvMeals"
             android:layout_width="match_parent"

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondActivity"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/twInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First activity data:"/>
+    <Button
+        android:id="@+id/btnThirdActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Third activity"/>
+    <Button
+        android:id="@+id/btnCloseActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Close activity"/>
+</LinearLayout>
