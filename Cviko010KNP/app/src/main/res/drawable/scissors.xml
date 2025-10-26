@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#FFD93D"
+        android:pathData="M100,100m-90,0a90,90 0,1,1 180,0a90,90 0,1,1 -180,0"/>
+
+    <!-- Palm base -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M75,120 L75,95 L125,95 L125,120 Q125,135 115,140 L85,140 Q75,135 75,120 Z"/>
+
+    <!-- Index finger (extended) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M80,95 L75,60 Q73,45 80,40 Q88,35 93,42 L98,70 L95,95 Z"/>
+
+    <!-- Middle finger (extended) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M105,95 L102,70 Q100,50 105,40 Q112,35 120,40 Q127,45 125,60 L120,95 Z"/>
+
+    <!-- Ring finger (folded) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M110,95 L110,105 Q110,110 115,110 Q120,110 120,105 L120,95 Z"/>
+
+    <!-- Pinky (folded) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M120,95 L120,102 Q120,107 124,107 Q128,107 128,102 L128,95 Z"/>
+
+    <!-- Thumb -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M75,105 L65,105 Q55,105 52,95 L52,85 Q52,75 62,72 Q70,70 75,78 L75,95 Z"/>
+
+    <!-- Finger details -->
+    <path
+        android:strokeColor="#E0E0E0"
+        android:strokeWidth="2"
+        android:pathData="M85,60 Q87,58 89,60 M115,60 Q117,58 119,60"/>
+</vector>

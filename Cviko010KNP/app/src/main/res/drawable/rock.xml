@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Background circle -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M100,100m-90,0a90,90 0,1,1 180,0a90,90 0,1,1 -180,0"/>
+
+    <!-- Rock/Fist -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M70,85 Q65,75 65,65 Q65,50 75,45 Q80,42 85,45 Q87,40 92,38 Q100,35 105,40 Q107,35 115,35 Q125,35 128,45 Q132,40 138,42 Q148,45 148,58 L148,75 Q148,85 145,90 L145,110 Q145,120 135,125 L75,125 Q65,120 65,110 L65,95 Q65,90 70,85 Z"/>
+
+    <!-- Knuckles detail -->
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M75,95 Q80,92 85,95 M95,95 Q100,92 105,95 M115,95 Q120,92 125,95"/>
+
+    <!-- Thumb -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M65,95 Q55,95 52,105 Q50,115 58,120 Q65,123 70,118 L70,100 Q70,95 65,95 Z"/>
+</vector>
