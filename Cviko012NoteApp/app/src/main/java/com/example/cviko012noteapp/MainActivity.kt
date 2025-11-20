@@ -1,4 +1,4 @@
-package com.example.myapp012amynotehub
+package com.example.cviko012noteapp
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,46 +19,57 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var noteDao: NoteDao
     private lateinit var adapter: NoteAdapter
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //setContentView(R.layout.activity_main)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Po kliknutí na FAB otevře AddNoteActivity
         binding.fabAddNote.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
             startActivity(intent)
         }
 
-        // DAO
-        noteDao = NoteHubDatabaseInstance.getDatabase(applicationContext).noteDao()
 
-        // Adapter s callbacky
+        /* Zobrazování poznámek */
+
         adapter = NoteAdapter(
             onEditClick = { note ->
-                // sem později doplníme editaci
+                val intent = Intent(this, EditNoteActivity::class.java)
+                intent.putExtra("note_id", note.id)
+                startActivity(intent)
             },
             onDeleteClick = { note ->
                 deleteNote(note)
             }
         )
 
-        // RecyclerView
+        // 2) Nastavení RecyclerView
         binding.recyclerViewNotes.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewNotes.adapter = adapter
 
-        // Flow
+        // 3) Získání DAO
+        val noteDao = NoteHubDatabaseInstance.getDatabase(applicationContext).noteDao()
+
+        // 4) Pozorování dat pomocí Flow z Room
+        // Spustí korutinu v rámci životního cyklu aktivity.
+        // Když se aktivita zničí, korutina se automaticky ukončí.
         lifecycleScope.launch {
+            // Sleduje Flow. Kdykoli se změní data v DB → seznam se okamžitě obnoví.
             noteDao.getAllNotes().collectLatest { notes ->
+                //Pošle nová data do adapteru, aby se překreslil RecyclerView.
                 adapter.submitList(notes)
             }
         }
     }
-
     private fun deleteNote(note: Note) {
         // spustí se asynchronní úkol na vlákně určeném pro práci s databází
         // a ukončí se automaticky, když se aktivita zničí

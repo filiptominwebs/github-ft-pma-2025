@@ -45,9 +45,7 @@ class AddNoteActivity : AppCompatActivity() {
                 noteDao.insert(note)
 
                 // Po uložení zavře tuto aktivitu a vrátí se zpět na hlavní obrazovku
-                withContext(Dispatchers.Main) {
-                    finish()
-                }
+                finish()
             }
         }
 

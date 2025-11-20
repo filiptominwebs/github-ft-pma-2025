@@ -1,4 +1,4 @@
-package com.example.myapp012amynotehub
+package com.example.cviko012noteapp
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

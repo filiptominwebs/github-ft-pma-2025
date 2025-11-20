@@ -1,16 +1,14 @@
-package com.example.myapp012amynotehub
+package com.example.cviko012noteapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cviko012noteapp.data.Note
-
 import com.example.cviko012noteapp.databinding.ItemNoteBinding
 
-class NoteAdapter(private val onEditClick: (Note) -> Unit, private val onDeleteClick: (Note) -> Unit) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter( private val onEditClick: (Note) -> Unit, private val onDeleteClick: (Note) -> Unit) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     // Seznam poznámek, které se mají zobrazit
-
     private var notes: List<Note> = emptyList()
 
     // ViewHolder drží binding jednoho itemu (jedné poznámky)
@@ -31,6 +29,15 @@ class NoteAdapter(private val onEditClick: (Note) -> Unit, private val onDeleteC
 
         holder.binding.tvNoteTitle.text = currentNote.title
         holder.binding.tvNoteContent.text = currentNote.content
+
+        holder.binding.ivEdit.setOnClickListener {
+            onEditClick(currentNote)
+        }
+
+        // DOPLNĚNO: Kliknutí na DELETE ikonu
+        holder.binding.ivDelete.setOnClickListener {
+            onDeleteClick(currentNote)
+        }
     }
 
     // Vrátí počet poznámek → RecyclerView ví, kolik řádků má vykreslit
