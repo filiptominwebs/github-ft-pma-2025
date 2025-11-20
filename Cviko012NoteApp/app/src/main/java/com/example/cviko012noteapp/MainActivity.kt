@@ -14,33 +14,35 @@ import com.example.cviko012noteapp.data.NoteDao
 import com.example.cviko012noteapp.data.NoteHubDatabaseInstance
 import com.example.cviko012noteapp.databinding.ActivityMainBinding
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
     private lateinit var noteDao: NoteDao
     private lateinit var adapter: NoteAdapter
 
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setContentView(R.layout.activity_main)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Po kliknutí na FAB otevře AddNoteActivity
+        // value pro vyhledávání
+        val searchQuery = MutableStateFlow("")
+
         binding.fabAddNote.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
             startActivity(intent)
         }
 
+        // DAO
+        noteDao = NoteHubDatabaseInstance.getDatabase(applicationContext).noteDao()
 
-        /* Zobrazování poznámek */
-
+        // Adapter s callbacky
         adapter = NoteAdapter(
             onEditClick = { note ->
                 val intent = Intent(this, EditNoteActivity::class.java)
@@ -52,24 +54,47 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
-        // 2) Nastavení RecyclerView
+        // RecyclerView
         binding.recyclerViewNotes.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewNotes.adapter = adapter
 
-        // 3) Získání DAO
-        val noteDao = NoteHubDatabaseInstance.getDatabase(applicationContext).noteDao()
-
-        // 4) Pozorování dat pomocí Flow z Room
-        // Spustí korutinu v rámci životního cyklu aktivity.
-        // Když se aktivita zničí, korutina se automaticky ukončí.
+        // Flow
         lifecycleScope.launch {
-            // Sleduje Flow. Kdykoli se změní data v DB → seznam se okamžitě obnoví.
             noteDao.getAllNotes().collectLatest { notes ->
-                //Pošle nová data do adapteru, aby se překreslil RecyclerView.
                 adapter.submitList(notes)
             }
         }
+
+        // --- Vyhledávání v poznámkách ---
+        // Listener SearchView: změna textu → změní hodnotu Flow
+        binding.searchViewNotes.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                searchQuery.value = newText ?: ""
+                return true
+            }
+        })
+
+        // Jeden společný collector, který reaguje na změnu textu
+        lifecycleScope.launch {
+            searchQuery.collectLatest { text ->
+                if (text.isEmpty()) {
+                    // Zobrazit všechny poznámky
+                    noteDao.getAllNotes().collectLatest { notes ->
+                        adapter.submitList(notes)
+                    }
+                } else {
+                    // Zobrazit filtrované poznámky
+                    noteDao.searchNotes(text).collectLatest { notes ->
+                        adapter.submitList(notes)
+                    }
+                }
+            }
+        }
+
     }
+
     private fun deleteNote(note: Note) {
         // spustí se asynchronní úkol na vlákně určeném pro práci s databází
         // a ukončí se automaticky, když se aktivita zničí

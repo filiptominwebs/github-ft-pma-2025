@@ -21,15 +21,27 @@
         android:layout_marginBottom="8dp" />
 
     <!-- RecyclerView pro seznam poznámek -->
+    <SearchView
+        android:id="@+id/searchViewNotes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:queryHint="Hledat poznámky..."
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <!-- RecyclerView pod SearchView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewNotes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/searchViewNotes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
 
     <!-- FAB pro přidání nové poznámky -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,7 +50,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="Přidat poznámku"
         android:src="@drawable/baseline_add_24"
-        app:backgroundTint="@android:color/system_inverse_primary_dark"
+        android:backgroundTint="@color/black"
         app:tint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
