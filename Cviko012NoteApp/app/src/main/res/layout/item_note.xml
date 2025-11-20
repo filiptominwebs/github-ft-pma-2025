@@ -18,6 +18,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvNoteId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID: 1"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
             android:id="@+id/tvNoteTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +40,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ukázkový obsah..."
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+        <TextView
+            android:id="@+id/tvNoteCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kategorie"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:textStyle="italic"/>
     </LinearLayout>
 
     <!-- EDIT icon -->
@@ -40,7 +58,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:padding="6dp"
-        android:backgroundTint="@color/yellow"
+        android:src="@drawable/baseline_edit_24"
         android:contentDescription="Upravit poznámku"
         android:layout_marginEnd="12dp"/>
 
@@ -50,7 +68,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:padding="6dp"
-        android:src="@color/red"
+        android:src="@drawable/baseline_delete_24"
         app:tint="#F44336"
         android:contentDescription="Smazat poznámku" />
 

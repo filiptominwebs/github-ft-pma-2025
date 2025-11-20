@@ -3,6 +3,7 @@ package com.example.cviko012noteapp
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -96,10 +97,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun deleteNote(note: Note) {
-        // spustí se asynchronní úkol na vlákně určeném pro práci s databází
-        // a ukončí se automaticky, když se aktivita zničí
-        lifecycleScope.launch(Dispatchers.IO) {
-            noteDao.delete(note)
-        }
+        AlertDialog.Builder(this)
+            .setTitle("Smazat poznámku")
+            .setMessage("Opravdu chcete smazat tuto poznámku?")
+            .setPositiveButton("ANO") { dialog, _ ->
+                // Uživatel potvrdil, smazat
+                lifecycleScope.launch(Dispatchers.IO) {
+                    noteDao.delete(note)
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("NE") { dialog, _ ->
+                // Uživatel zrušil, nic nedělat
+                dialog.dismiss()
+            }
+            .show()
     }
 }

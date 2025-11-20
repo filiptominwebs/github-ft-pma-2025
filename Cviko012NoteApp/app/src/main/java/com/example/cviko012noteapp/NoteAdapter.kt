@@ -26,9 +26,10 @@ class NoteAdapter( private val onEditClick: (Note) -> Unit, private val onDelete
     // Naplní jednu položku daty z konkrétní poznámky (title + content)
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote = notes[position]
-
+        holder.binding.tvNoteId.text = "ID: ${currentNote.id}"
         holder.binding.tvNoteTitle.text = currentNote.title
         holder.binding.tvNoteContent.text = currentNote.content
+        holder.binding.tvNoteCategory.text = "Kategorie: ${currentNote.category}"
 
         holder.binding.ivEdit.setOnClickListener {
             onEditClick(currentNote)
