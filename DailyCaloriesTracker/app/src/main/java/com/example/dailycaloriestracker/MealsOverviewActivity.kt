@@ -86,10 +86,8 @@ class MealsOverviewActivity : AppCompatActivity() {
     }
 
     private fun onEditClicked(meal: Meal) {
-        // Use view binding for the edit dialog
         val dialogBinding = ActivityAddMealBinding.inflate(layoutInflater)
 
-        // prefill
         dialogBinding.etName.setText(meal.name)
         dialogBinding.etCalories.setText(meal.calories.toString())
         dialogBinding.etCarbs.setText(meal.carbs.toString())
@@ -100,28 +98,34 @@ class MealsOverviewActivity : AppCompatActivity() {
         dialogBinding.spinnerType.adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, types).apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         dialogBinding.spinnerType.setSelection(types.indexOf(meal.type.name).coerceAtLeast(0))
 
-        val dialog = AlertDialog.Builder(this)
+        val alertDialog = AlertDialog.Builder(this)
             .setView(dialogBinding.root)
-            .setPositiveButton(getString(R.string.save)) { _, _ ->
-                val name = dialogBinding.etName.text?.toString()?.trim().orEmpty()
-                if (name.isEmpty()) return@setPositiveButton
-                val calories = dialogBinding.etCalories.text?.toString()?.toIntOrNull() ?: 0
-                val carbs = dialogBinding.etCarbs.text?.toString()?.toIntOrNull() ?: 0
-                val protein = dialogBinding.etProtein.text?.toString()?.toIntOrNull() ?: 0
-                val fat = dialogBinding.etFat.text?.toString()?.toIntOrNull() ?: 0
-                val selectedType = MealType.entries.find { it.name == dialogBinding.spinnerType.selectedItem as String } ?: MealType.OTHER
-                lifecycleScope.launch {
-                    val db = AppDatabase.getInstance(applicationContext)
-                    val dao = db.mealDao()
-                    val updated = meal.copy(name = name, calories = calories, carbs = carbs, protein = protein, fat = fat, type = selectedType)
-                    withContext(Dispatchers.IO) { dao.updateMeal(updated) }
-                    loadMeals()
-                }
-            }
-            .setNegativeButton(getString(R.string.cancel), null)
             .create()
 
-        dialog.show()
+        alertDialog.show()
+
+        dialogBinding.btnSave.setOnClickListener {
+            val name = dialogBinding.etName.text?.toString()?.trim().orEmpty()
+            if (name.isEmpty()) return@setOnClickListener
+            val calories = dialogBinding.etCalories.text?.toString()?.toIntOrNull() ?: 0
+            val carbs = dialogBinding.etCarbs.text?.toString()?.toIntOrNull() ?: 0
+            val protein = dialogBinding.etProtein.text?.toString()?.toIntOrNull() ?: 0
+            val fat = dialogBinding.etFat.text?.toString()?.toIntOrNull() ?: 0
+            val selectedType = MealType.entries.find { it.name == dialogBinding.spinnerType.selectedItem as String } ?: MealType.OTHER
+            lifecycleScope.launch {
+                val db = AppDatabase.getInstance(applicationContext)
+                val dao = db.mealDao()
+                val updated = meal.copy(name = name, calories = calories, carbs = carbs, protein = protein, fat = fat, type = selectedType)
+                withContext(Dispatchers.IO) { dao.updateMeal(updated) }
+                loadMeals()
+
+                alertDialog.dismiss()
+            }
+        }
+
+        dialogBinding.btnCancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
     }
 
     private fun onDeleteClicked(meal: Meal) {
